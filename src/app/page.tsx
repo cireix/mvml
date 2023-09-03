@@ -1,11 +1,12 @@
 "use client"
 
 import useChatBot from "./hooks/useChatBot";
+import { Main } from "./styles/styles";
 
 export default function Home() {
   const { history, submitting, handleSubmit } = useChatBot();
   return (
-    <main>
+    <Main>
       {history.map((response, index) => (
         <p key={index}>{response.text}</p>
       ))}
@@ -13,6 +14,6 @@ export default function Home() {
         <input name="query" />
         <button type="submit">Test</button>
       </form>
-    </main>
+    </Main>
   )
 }

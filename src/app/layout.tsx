@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import { Lato } from 'next/font/google'
 import StyledComponentsRegistry from '@/lib/registry'
 
+import './global.css';
+
 const inter = Lato({
   weight: ['400', '700', '900'],
   subsets: ['latin']

@@ -9,16 +9,33 @@ class HuggingFace extends AxiosController{
     private axiosHeader: Dict<string> = {
         'Authorization': this.auth,
     }
+    private parseModelResponse(text: string, response: IHF_GPTResponse[]): string {
+        if (response.length === 0) {
+            // Log error here;
+            throw new Error('No response from HuggingFace');
+        }
+        const generatedText = response[0].generated_text;
+        const toRemove = `${text}\n\n`;
+        let parsedText = generatedText.replace(toRemove, '');
+        const lastPeriod = parsedText.lastIndexOf('.');
+        parsedText = parsedText.slice(0, lastPeriod + 1);
+        return parsedText;
 
+    }
     public async queryModel(text: string) {
         const response = await this.axiosPOST<IHF_GPTResponse[]>(
             this.modelURL, {
                 inputs: text,
+                parameters: {
+                    max_length: 60,
+                    no_repeat_ngram_size: 3,
+                },
             },
             this.axiosHeader
         );
-        return response;
+        return this.parseModelResponse(text, response);
     }
+
     // async function embedding(data: any) {
     //   const model_id = 'sentence-transformers/all-mpnet-base-v2'
     //   const response = await fetch(

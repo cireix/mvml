@@ -1,16 +1,18 @@
 "use client"
 
-import { HuggingFaceController } from "@/controllers"
+import useChatBot from "./hooks/useChatBot";
 
-// TODO: Add debounce
 export default function Home() {
-  const handleButton = async () => {
-    const res = await HuggingFaceController.queryModel('Who are you?')
-    console.log(res);
-  }
+  const { history, submitting, handleSubmit } = useChatBot();
   return (
     <main>
-      <button onClick={() => handleButton()}>Test</button>
+      {history.map((response, index) => (
+        <p key={index}>{response.text}</p>
+      ))}
+      <form onSubmit={handleSubmit}>
+        <input name="query" />
+        <button type="submit">Test</button>
+      </form>
     </main>
   )
 }

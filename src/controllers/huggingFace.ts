@@ -9,6 +9,9 @@ class HuggingFace extends AxiosController{
     private axiosHeader: Dict<string> = {
         'Authorization': this.auth,
     }
+    // Parses the response from queryModel
+    // Returns the generated text without the input text
+    // and stops the sentence at the last end punctuation
     private parseModelResponse(text: string, response: IHF_GPTResponse[]): string {
         if (response.length === 0) {
             // Log error here;
@@ -17,8 +20,11 @@ class HuggingFace extends AxiosController{
         const generatedText = response[0].generated_text;
         const toRemove = `${text}\n\n`;
         let parsedText = generatedText.replace(toRemove, '');
+
         const lastPeriod = parsedText.lastIndexOf('.');
-        parsedText = parsedText.slice(0, lastPeriod + 1);
+        const lastQuestion = parsedText.lastIndexOf('?');
+        const lastExclamation = parsedText.lastIndexOf('!');
+        parsedText = parsedText.slice(0, Math.max(lastPeriod, lastQuestion, lastExclamation) + 1);
         return parsedText;
 
     }
@@ -29,6 +35,7 @@ class HuggingFace extends AxiosController{
                 parameters: {
                     max_length: 60,
                     no_repeat_ngram_size: 3,
+                    return_full_text: true,
                 },
             },
             this.axiosHeader

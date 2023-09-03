@@ -1,8 +1,11 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Lato } from 'next/font/google'
 import StyledComponentsRegistry from '@/lib/registry'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Lato({
+  weight: ['400', '700', '900'],
+  subsets: ['latin']
+})
 
 export const metadata: Metadata = {
   title: 'Jarvis - Customer Support',

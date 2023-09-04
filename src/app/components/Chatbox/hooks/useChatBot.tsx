@@ -30,6 +30,10 @@ const useChatBot = () => {
         // Prevent blank submissions
         const queryField = form.query.value;
         if (!queryField) return;
+        if(navigator.userAgent.indexOf('iPhone') > -1 ) {
+            // @ts-ignore
+            document.activeElement!.blur();
+        }
 
         setSubmitting(true);
         const query: IChatMessage = {
@@ -49,7 +53,6 @@ const useChatBot = () => {
             // Log error
             console.error(err);
         }
-
         setSubmitting(false);
     };
 

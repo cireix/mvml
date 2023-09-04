@@ -89,6 +89,11 @@ export class HuggingFace extends AxiosController{
             id: text,
         }
         await this.axiosPOST('/pinecone/upsert', data);
+        
+        // Query Pinecone for similar embeddings of FAQ Questions
+        // if similar embedding is found, return the FAQ Answer
+        // else query HuggingFace Model
+
         const response = await this.queryModel(text);
         return response;
     }

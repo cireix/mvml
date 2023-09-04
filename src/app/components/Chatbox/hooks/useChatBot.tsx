@@ -1,15 +1,32 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { HuggingFaceController } from "@/controllers";
 import { IChatMessage } from "@/models";
+
+// Get the types for SimpleBarCore
+import SimpleBarCore from 'simplebar-core';
 
 const useChatBot = () => {
     const [history, setHistory] = useState<IChatMessage[]>([]);
     const [submitting, setSubmitting] = useState(false);
+    const historyRef = useRef<SimpleBarCore>(null);
+
+    const scrollToBottom = () => {
+        if (historyRef.current) {
+            const scrollContainer = historyRef.current.contentEl;
+            if (scrollContainer) {
+                scrollContainer.scrollIntoView({
+                    behavior: "smooth",
+                    block: "end",
+                });
+            }
+        }
+    }
+
+    useEffect(scrollToBottom, [history]);
 
 
     const submitForm = async (form: HTMLFormElement) => {
         if (submitting) return;
-
         // Prevent blank submissions
         const queryField = form.query.value;
         if (!queryField) return;
@@ -32,6 +49,7 @@ const useChatBot = () => {
             // Log error
             console.error(err);
         }
+
         setSubmitting(false);
     };
 
@@ -53,6 +71,7 @@ const useChatBot = () => {
         submitting,
         handleSubmit,
         handleEnter,
+        historyRef,
     }
 }
 

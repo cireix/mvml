@@ -1,13 +1,15 @@
 import { Line, Root, Header, InputForm, Input, Submit, ChatHistory } from "./styles";
 import useChatBot from "./hooks/useChatBot";
-import 'simplebar-react/dist/simplebar.min.css';
 import Message from "./components/Message/Message";
+
+import 'simplebar-react/dist/simplebar.min.css';
 const Chatbox = () => {
     const {
         history,
         submitting,
         handleSubmit,
         handleEnter,
+        historyRef,
     } = useChatBot();
     return(
         <Root>
@@ -18,6 +20,7 @@ const Chatbox = () => {
             <ChatHistory
                 forceVisible="y"
                 autoHide={false}
+                ref={historyRef}
             >
                 {history.map((chatMessage, index) => (
                     <Message chatMessage={chatMessage} key={index} />

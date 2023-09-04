@@ -1,6 +1,11 @@
 ## Containerization
 
-Hello
+I would use GitHub Actions for the CI/CD pipeline of this application. This would include steps like setting up a staging version, deployment, and dockerizing.
+
+Depending on the scale of the application, I would take slightly different approaches:
+
+For smaller applications, I would use a Vercel/Netlify deployment.
+For bigger applications, I would use Docker to containerize the application. I would then push the container onto Kubernetes and deploy it from there.
 
 ## Getting Started
 

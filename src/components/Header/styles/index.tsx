@@ -6,6 +6,8 @@ export const Root = styled.header`
     top: 0;
     left: 0;
     width: 100%;
+    display: flex;
+    justify-content: flex-start;
     ${vw([
         ['padding-top', 40, 20, 10],
         ['padding-bottom', 40, 20, 10],

@@ -25,6 +25,7 @@ const Chatbox = () => {
                 {history.map((chatMessage, index) => (
                     <Message chatMessage={chatMessage} key={index} />
                 ))}
+                {submitting && <p>Jarvis is typing...</p>}
             </ChatHistory>
             <InputForm onSubmit={handleSubmit}>
                 <Input onKeyPress={handleEnter} name="query"/>

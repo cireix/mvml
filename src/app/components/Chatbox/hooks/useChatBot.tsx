@@ -31,8 +31,9 @@ const useChatBot = () => {
         const queryField = form.query.value;
         if (!queryField) return;
         if(navigator.userAgent.indexOf('iPhone') > -1 ) {
-            // @ts-ignore
-            document.activeElement!.blur();
+            if (document.activeElement) {
+                (document.activeElement as HTMLElement).blur();
+            }
         }
 
         setSubmitting(true);

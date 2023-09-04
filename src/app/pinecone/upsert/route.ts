@@ -1,6 +1,6 @@
 'use server';
-import { NextResponse, NextRequest } from "next/server";
 import { Pinecone } from "@/controllers";
+import { NextRequest, NextResponse } from "next/server";
 
 // This route would be in the backend
 // However for the sake of simplicity,

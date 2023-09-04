@@ -1,9 +1,8 @@
 "use client";
-
-import { MVMLLogo, Root } from './styles';
-
 import MVMLLogoImg from '@/assets/MVML_logo.png';
 import Link from 'next/link';
+
+import { MVMLLogo, Root } from './styles';
 
 const Footer = () => {
     return(

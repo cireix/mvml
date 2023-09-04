@@ -1,9 +1,9 @@
 "use client";
 
-import { ABCLogo, Root } from './styles';
-
 import ABCLogoImg from '@/assets/ABC_logo.png';
 import Link from 'next/link';
+
+import { ABCLogo, Root } from './styles';
 
 const Header = () => {
     return(

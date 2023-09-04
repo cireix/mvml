@@ -1,5 +1,5 @@
-import axios, { AxiosResponse } from 'axios';
 import { Dict } from '@/models';
+import axios, { AxiosResponse } from 'axios';
 
 export abstract class AxiosController {
     protected async axiosGET<T>(

@@ -1,6 +1,5 @@
-import { AxiosController } from "@/controllers";
-// import { PineconeController } from "./PineconeController";
 import { Dict, IHF_EmbeddingResponse, IHF_GPTResponse } from "@/models";
+import { AxiosController } from "./AxiosController";
 
 export class HuggingFace extends AxiosController{
     private modelURL: string = 'https://api-inference.huggingface.co/models/gpt2';
@@ -53,7 +52,6 @@ export class HuggingFace extends AxiosController{
 
     private async queryModel(text: string) {
         const query = this.transformQuery(text.trim());
-        console.log(query);
         const response = await this.axiosPOST<IHF_GPTResponse[]>(
             this.modelURL, {
                 inputs: query,

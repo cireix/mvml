@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from "react";
 import { HuggingFaceController } from "@/controllers";
 import { IChatMessage } from "@/models";
+import { useEffect, useRef, useState } from "react";
 
 // Get the types for SimpleBarCore
 import SimpleBarCore from 'simplebar-core';

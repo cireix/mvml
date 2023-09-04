@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import { vw } from '@/utils';
+import styled from 'styled-components';
 
 import JarvisSVG from '@/assets/jarvis.svg';
 import UserSVG from '@/assets/user.svg';

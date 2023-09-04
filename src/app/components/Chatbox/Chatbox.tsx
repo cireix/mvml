@@ -1,6 +1,6 @@
-import { Line, Root, Header, InputForm, Input, Submit, ChatHistory } from "./styles";
-import useChatBot from "./hooks/useChatBot";
 import Message from "./components/Message/Message";
+import useChatBot from "./hooks/useChatBot";
+import { ChatHistory, Header, Input, InputForm, Line, Root, Submit } from "./styles";
 
 import 'simplebar-react/dist/simplebar.min.css';
 const Chatbox = () => {

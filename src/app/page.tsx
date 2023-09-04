@@ -1,7 +1,9 @@
 "use client"
 
 import useChatBot from "./hooks/useChatBot";
-import { Main } from "./styles/styles";
+import { Main } from "./styles";
+
+import ABCLogoImg from "@/assets/ABC_logo.png";
 
 export default function Home() {
   const { history, submitting, handleSubmit } = useChatBot();

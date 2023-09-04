@@ -3,6 +3,7 @@ import { Lato } from 'next/font/google'
 import StyledComponentsRegistry from '@/lib/registry'
 
 import './global.css';
+import Header from './components/Header/Header';
 
 const inter = Lato({
   weight: ['400', '700', '900'],
@@ -23,6 +24,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <StyledComponentsRegistry>
+          <Header />
           {children}
         </StyledComponentsRegistry>
       </body>

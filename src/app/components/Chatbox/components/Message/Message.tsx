@@ -8,7 +8,7 @@ interface MessageProps {
 const Message = (props: MessageProps) => {
     const { chatMessage } = props;
     return (
-        <Root isJarvis={chatMessage.type === 'Jarvis'}>
+        <Root isjarvis={chatMessage.type === 'Jarvis'}>
             {chatMessage.type === 'Jarvis' ? <Jarvis /> : <User />}
             <Bubble className="chat">{chatMessage.text}</Bubble>
         </Root>

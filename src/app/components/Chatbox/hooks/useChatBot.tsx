@@ -9,7 +9,6 @@ const useChatBot = () => {
     const [history, setHistory] = useState<IChatMessage[]>([]);
     const [submitting, setSubmitting] = useState(false);
     const historyRef = useRef<SimpleBarCore>(null);
-
     const scrollToBottom = () => {
         if (historyRef.current) {
             const scrollContainer = historyRef.current.contentEl;
@@ -78,5 +77,6 @@ const useChatBot = () => {
         historyRef,
     }
 }
+
 
 export default useChatBot;

@@ -1,15 +1,19 @@
 import { AxiosController } from "@/controllers";
 import { Dict, IHF_EmbeddingResponse, IHF_GPTResponse } from "@/models";
 
-class HuggingFace extends AxiosController{
+export class HuggingFace extends AxiosController{
     private modelURL: string = 'https://api-inference.huggingface.co/models/gpt2';
     private embeddingURL: string = 'https://api-inference.huggingface.co/pipeline/feature-extraction/sentence-transformers/all-mpnet-base-v2';
-    // private auth: string = `Bearer ${process.env.HUGGINGFACE_API_KEY}`
-    private auth: string = 'Bearer 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';
-    private axiosHeader: Dict<string> = {
-        'Authorization': this.auth,
-    }
+    private axiosHeader: Dict<string> = {}
 
+    constructor(authKey: string | undefined) {
+        super();
+        if (!authKey) throw new Error('No HuggingFace API Key provided');
+        this.axiosHeader = {
+            'Authorization': authKey,
+        }
+
+    }
     // Parses the response from queryModel
     // Returns the generated text without the input text
     // and stops the sentence at the last end punctuation
@@ -63,7 +67,7 @@ class HuggingFace extends AxiosController{
         return this.parseModelResponse(query, response);
     }
 
-    private async embedding(text: string) {
+    private async getEmbedding(text: string) {
         const response = await this.axiosPOST<IHF_EmbeddingResponse>(
             this.embeddingURL, {
                 inputs: text,
@@ -78,12 +82,12 @@ class HuggingFace extends AxiosController{
         
     }
     public async chat(text: string): Promise<string> {
-        const embedding = await this.embedding(text);
-        console.log(embedding);
+        const embedding = await this.getEmbedding(text);
+        // 
         const response = await this.queryModel(text);
         return response;
     }
     
 }
 
-export const HuggingFaceController = new HuggingFace();
+export const HuggingFaceController = new HuggingFace(process.env.HF_API_KEY);

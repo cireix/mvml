@@ -3,6 +3,9 @@ const nextConfig = {
     compiler: {
       styledComponents: true,
     },
+    env: {
+      HF_API_KEY: process.env.HF_API_KEY,
+    },
     webpack(config) {
       config.module.rules.push({
         loader: '@svgr/webpack',

@@ -14,13 +14,13 @@ export const Bubble = styled.p`
     ])}
 `
 
-export const Root = styled.div<{ isJarvis: boolean }>`
+export const Root = styled.div<{ isjarvis: boolean }>`
     width: 100%;
     display: flex;
     align-items: flex-start;
-    flex-direction: ${props => props.isJarvis ? 'row' : 'row-reverse'};
+    flex-direction: ${props => props.isjarvis ? 'row' : 'row-reverse'};
     ${Bubble} {
-        background: ${props => props.isJarvis ? props.theme.colors.grey : props.theme.colors.green};
+        background: ${props => props.isjarvis ? props.theme.colors.grey : props.theme.colors.green};
     }
     ${vw([
         ['margin-top', 20, 20, 12],

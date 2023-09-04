@@ -72,9 +72,6 @@ export class HuggingFace extends AxiosController{
         const response = await this.axiosPOST<IHF_EmbeddingResponse>(
             this.embeddingURL, {
                 inputs: text,
-                options: {
-                    wait_for_model: true,
-                },
             },
             this.axiosHeader
         );

@@ -3,8 +3,12 @@ const nextConfig = {
     compiler: {
       styledComponents: true,
     },
+    experimental: {
+      serverActions: true,
+    },
     env: {
       HF_API_KEY: process.env.HF_API_KEY,
+      PINECONE_API_KEY: process.env.PINECONE_API_KEY,
     },
     webpack(config) {
       config.module.rules.push({

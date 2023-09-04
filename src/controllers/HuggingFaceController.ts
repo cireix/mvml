@@ -1,4 +1,5 @@
 import { AxiosController } from "@/controllers";
+// import { PineconeController } from "./PineconeController";
 import { Dict, IHF_EmbeddingResponse, IHF_GPTResponse } from "@/models";
 
 export class HuggingFace extends AxiosController{
@@ -83,7 +84,11 @@ export class HuggingFace extends AxiosController{
     }
     public async chat(text: string): Promise<string> {
         const embedding = await this.getEmbedding(text);
-        // 
+        const data = {
+            embedding: embedding,
+            id: text,
+        }
+        await this.axiosPOST('/pinecone/upsert', data);
         const response = await this.queryModel(text);
         return response;
     }

@@ -4,6 +4,7 @@ import StyledComponentsRegistry from '@/lib/registry'
 
 import './global.css';
 import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
 
 const inter = Lato({
   weight: ['400', '700', '900'],
@@ -26,6 +27,7 @@ export default function RootLayout({
         <StyledComponentsRegistry>
           <Header />
           {children}
+          <Footer />
         </StyledComponentsRegistry>
       </body>
     </html>

@@ -13,7 +13,7 @@ export const Main = styled.main`
     align-items: center;
     min-height: 100vh;
     ${vw([
-        ['min-height', '100vh', '100vh', '100vh'],
+        ['min-height', '100vh', '100vh', '90vh'],
         ['padding-left', 400, 84, 12],
         ['padding-right', 400, 84, 12],
     ])}

@@ -15,7 +15,7 @@ export const GlobalStyles = createGlobalStyle`
     p {
         font-weight: 400;
         ${vw([
-            ['font-size', 20, 14, 14],
+            ['font-size', 22, 14, 12],
         ])}
     }
 
@@ -24,7 +24,7 @@ export const GlobalStyles = createGlobalStyle`
         outline: none;
         border: none;
         ${vw([
-            ['font-size', 20, 14, 14],
+            ['font-size', 20, 14, 12],
         ])}
     }
 

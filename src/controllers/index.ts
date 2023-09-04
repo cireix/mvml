@@ -1,5 +1,5 @@
 import { AxiosController } from "./AxiosController";
-import { HuggingFaceController } from "./huggingFace";
+import { HuggingFaceController } from "./HuggingFaceController";
 export {
     AxiosController,
     HuggingFaceController,

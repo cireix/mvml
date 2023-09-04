@@ -5,7 +5,6 @@ import BackgroundImg from '@/assets/background.jpg';
 
 export const Main = styled.main`
     width: 100%;
-    min-height: 100vh;
     background-image: url(${BackgroundImg.src});
     background-repeat: no-repeat;
     background-size: cover;
@@ -13,6 +12,7 @@ export const Main = styled.main`
     justify-content: center;
     align-items: center;
     ${vw([
+        ['min-height', '100vh', '100vh', '90vh'],
         ['padding-left', 400, 84, 12],
         ['padding-right', 400, 84, 12],
     ])}

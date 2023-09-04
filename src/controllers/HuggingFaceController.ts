@@ -28,6 +28,7 @@ class HuggingFace extends AxiosController{
         return parsedText;
 
     }
+    // TODO: Add punctuation to the end of the input text
     public async queryModel(text: string) {
         const response = await this.axiosPOST<IHF_GPTResponse[]>(
             this.modelURL, {

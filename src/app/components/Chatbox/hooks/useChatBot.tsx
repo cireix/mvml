@@ -9,12 +9,18 @@ const useChatBot = () => {
 
     const submitForm = async (form: HTMLFormElement) => {
         if (submitting) return;
+
+        // Prevent blank submissions
+        const queryField = form.query.value;
+        if (!queryField) return;
+
         setSubmitting(true);
         const query: IChatMessage = {
             type: "User",
-            text: form.query.value,
+            text: queryField,
         }
         setHistory(state => [...state, query])
+        form.reset();
         try {
             const generatedText = await HuggingFaceController.queryModel(query.text);
             const res: IChatMessage = {

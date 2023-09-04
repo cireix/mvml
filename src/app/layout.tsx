@@ -1,11 +1,10 @@
-import type { Metadata } from 'next'
-import { Lato } from 'next/font/google'
-import StyledComponentsRegistry from '@/lib/registry'
+import { StyledComponentsRegistry, ThemeWrapper } from '@/lib';
+import type { Metadata } from 'next';
+import { Lato } from 'next/font/google';
 
-import './global.css';
-import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
-import { GlobalStyles, theme } from '@/styles';
+import Header from '@/components/Header/Header';
+import './global.css';
 
 const inter = Lato({
   weight: ['400', '700', '900'],
@@ -26,10 +25,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <StyledComponentsRegistry>
-          <GlobalStyles theme={theme} />
-          <Header />
-          {children}
-          <Footer />
+          <ThemeWrapper>
+            <Header />
+            {children}
+            <Footer />
+          </ThemeWrapper>
         </StyledComponentsRegistry>
       </body>
     </html>

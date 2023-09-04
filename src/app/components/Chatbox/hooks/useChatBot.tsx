@@ -44,7 +44,7 @@ const useChatBot = () => {
         setHistory(state => [...state, query])
         form.reset();
         try {
-            const generatedText = await HuggingFaceController.queryModel(query.text);
+            const generatedText = await HuggingFaceController.chat(query.text);
             const res: IChatMessage = {
                 type: "Jarvis",
                 text: generatedText,

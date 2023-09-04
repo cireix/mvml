@@ -9,6 +9,7 @@ class HuggingFace extends AxiosController{
     private axiosHeader: Dict<string> = {
         'Authorization': this.auth,
     }
+
     // Parses the response from queryModel
     // Returns the generated text without the input text
     // and stops the sentence at the last end punctuation
@@ -18,7 +19,7 @@ class HuggingFace extends AxiosController{
             throw new Error('No response from HuggingFace');
         }
         const generatedText = response[0].generated_text;
-        const toRemove = `${text}\n\n`;
+        const toRemove = `${text}`;
         let parsedText = generatedText.replace(toRemove, '');
 
         const lastPeriod = parsedText.lastIndexOf('.');
@@ -26,13 +27,31 @@ class HuggingFace extends AxiosController{
         const lastExclamation = parsedText.lastIndexOf('!');
         parsedText = parsedText.slice(0, Math.max(lastPeriod, lastQuestion, lastExclamation) + 1);
         return parsedText;
-
     }
-    // TODO: Add punctuation to the end of the input text
-    public async queryModel(text: string) {
+
+    // Transforms the input text to contain a punction at the end
+    // GPT2 Model provides better results when the input text ends in a punctuation
+    private transformQuery(text: string): string {
+        let query = text;
+        const wordList = ['who', 'what', 'when', 'where', 'why', 'how', 'is'];
+        if (!query.endsWith('.') && !query.endsWith('?') && !query.endsWith('!')) {
+            for (const word of wordList) {
+                if (query.toLowerCase().startsWith(word)) {
+                    query += '?';
+                    return query;
+                }
+            }
+            query += '.';
+        }
+        return query;
+    }
+
+    private async queryModel(text: string) {
+        const query = this.transformQuery(text.trim());
+        console.log(query);
         const response = await this.axiosPOST<IHF_GPTResponse[]>(
             this.modelURL, {
-                inputs: text,
+                inputs: query,
                 parameters: {
                     max_length: 60,
                     no_repeat_ngram_size: 3,
@@ -41,27 +60,26 @@ class HuggingFace extends AxiosController{
             },
             this.axiosHeader
         );
-        return this.parseModelResponse(text, response);
+        return this.parseModelResponse(query, response);
     }
 
-    // async function embedding(data: any) {
-    //   const model_id = 'sentence-transformers/all-mpnet-base-v2'
-    //   const response = await fetch(
-    //     `https://api-inference.huggingface.co/pipeline/feature-extraction/${model_id}`,
-    //     {
-    //       headers: { Authorization: 'Bearer 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' },
-    //       method: 'POST',
-    //       body: JSON.stringify({"inputs": data, "options":{"wait_for_model": true}}),
-    //     }
-    //   );
-    //   const result = await response.json();
-    //   return result;
-    // }
-    // public async chat(text: string): Promise<string> {
-    //     console.log(123);
-    //     const response = await this.queryModel(text);
-    //     return response;
-    // }
+    public async embedding(data: any) {
+      const model_id = 'sentence-transformers/all-mpnet-base-v2'
+      const response = await fetch(
+        `https://api-inference.huggingface.co/pipeline/feature-extraction/${model_id}`,
+        {
+          headers: { Authorization: 'Bearer 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' },
+          method: 'POST',
+          body: JSON.stringify({"inputs": data, "options":{"wait_for_model": true}}),
+        }
+      );
+      const result = await response.json();
+      return result;
+    }
+    public async chat(text: string): Promise<string> {
+        const response = await this.queryModel(text);
+        return response;
+    }
     
 }
 

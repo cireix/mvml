@@ -6,7 +6,7 @@ import BackgroundImg from '@/assets/background.jpg';
 export const Main = styled.main`
     width: 100%;
     background-image: url(${BackgroundImg.src});
-    background-repeat: no-repeat;
+    background-repeat: repeat-y;
     background-size: cover;
     display: flex;
     justify-content: center;

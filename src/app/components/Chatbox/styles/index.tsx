@@ -13,7 +13,7 @@ export const Root = styled.div`
         ['height',
             `calc(100vh - ${vwDesktop(150 * 2)})`,
             `calc(100vh - ${vwTablet(150 * 2)})`,
-            `calc(100vh - ${vwMobile(110 * 2)})`
+            `calc(100vh - ${vwMobile(140 * 2)})`
         ],
         ['padding-top', 30, 30, 20],
         ['padding-bottom', 30, 30, 20],

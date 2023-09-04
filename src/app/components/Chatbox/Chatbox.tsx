@@ -11,6 +11,7 @@ const Chatbox = () => {
         handleEnter,
         historyRef,
     } = useChatBot();
+    
     return(
         <Root>
             <Header>

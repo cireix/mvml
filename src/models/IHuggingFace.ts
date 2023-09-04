@@ -3,6 +3,4 @@ export interface IHF_GPTResponse {
     generated_text: string;
 }
 
-export interface IHF_EmbeddingResponse {
-
-}
+export type IHF_EmbeddingResponse = number[];

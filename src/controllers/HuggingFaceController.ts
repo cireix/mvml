@@ -1,5 +1,5 @@
 import { AxiosController } from "@/controllers";
-import { Dict, IHF_GPTResponse } from "@/models";
+import { Dict, IHF_EmbeddingResponse, IHF_GPTResponse } from "@/models";
 
 class HuggingFace extends AxiosController{
     private modelURL: string = 'https://api-inference.huggingface.co/models/gpt2';
@@ -63,20 +63,23 @@ class HuggingFace extends AxiosController{
         return this.parseModelResponse(query, response);
     }
 
-    public async embedding(data: any) {
-      const model_id = 'sentence-transformers/all-mpnet-base-v2'
-      const response = await fetch(
-        `https://api-inference.huggingface.co/pipeline/feature-extraction/${model_id}`,
-        {
-          headers: { Authorization: 'Bearer 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' },
-          method: 'POST',
-          body: JSON.stringify({"inputs": data, "options":{"wait_for_model": true}}),
-        }
-      );
-      const result = await response.json();
-      return result;
+    private async embedding(text: string) {
+        const response = await this.axiosPOST<IHF_EmbeddingResponse>(
+            this.embeddingURL, {
+                inputs: text,
+                options: {
+                    wait_for_model: true,
+                },
+            },
+            this.axiosHeader
+        );
+
+        return response;
+        
     }
     public async chat(text: string): Promise<string> {
+        const embedding = await this.embedding(text);
+        console.log(embedding);
         const response = await this.queryModel(text);
         return response;
     }

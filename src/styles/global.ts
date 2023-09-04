@@ -2,6 +2,7 @@
 
 import { createGlobalStyle } from "styled-components";
 import { vw } from "@/utils";
+import { theme } from "./theme";
 
 export const GlobalStyles = createGlobalStyle`
     h1 {
@@ -14,14 +15,27 @@ export const GlobalStyles = createGlobalStyle`
     p {
         font-weight: 400;
         ${vw([
-            ['font-size', 18, 18, 14],
+            ['font-size', 20, 14, 14],
         ])}
     }
 
-    input {
+    input, textarea {
+        font-weight: 400;
+        outline: none;
+        border: none;
+        ${vw([
+            ['font-size', 20, 14, 14],
+        ])}
+    }
+
+    button {
+        outline: none;
+        border: none;
+        cursor: pointer;
+        color: ${theme.colors.white};
         font-weight: 400;
         ${vw([
-            ['font-size', 18, 18, 14],
+            ['font-size', 24, 18, 14],
         ])}
     }
 `;

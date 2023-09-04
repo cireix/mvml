@@ -13,7 +13,7 @@ export const Main = styled.main`
     justify-content: center;
     align-items: center;
     ${vw([
-        ['padding-left', 580, 84, 12],
-        ['padding-right', 580, 84, 12],
+        ['padding-left', 400, 84, 12],
+        ['padding-right', 400, 84, 12],
     ])}
 `;

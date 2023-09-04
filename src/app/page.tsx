@@ -1,11 +1,9 @@
 "use client"
 
 import Chatbox from "./components/Chatbox/Chatbox";
-import useChatBot from "./hooks/useChatBot";
 import { Main } from "./styles";
 
 export default function Home() {
-  const { history, submitting, handleSubmit } = useChatBot();
   return (
     <Main>
       {/* {history.map((response, index) => (
